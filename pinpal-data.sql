@@ -29,7 +29,7 @@ CREATE TABLE `authorization` (
   KEY `reg_num` (`reg_num`),
   CONSTRAINT `authorization_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `authorization_ibfk_2` FOREIGN KEY (`reg_num`) REFERENCES `pinpal` (`reg_num`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `authorization` (
 
 LOCK TABLES `authorization` WRITE;
 /*!40000 ALTER TABLE `authorization` DISABLE KEYS */;
+INSERT INTO `authorization` VALUES (1,123256),(1,123456);
 /*!40000 ALTER TABLE `authorization` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +53,7 @@ CREATE TABLE `pinpal` (
   `reg_num` int(11) NOT NULL,
   `vali_code` varchar(30) NOT NULL,
   `latest_time` datetime DEFAULT NULL,
-  `latest_loca` varchar(50) NOT NULL,
+  `latest_loca` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`reg_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -63,6 +64,7 @@ CREATE TABLE `pinpal` (
 
 LOCK TABLES `pinpal` WRITE;
 /*!40000 ALTER TABLE `pinpal` DISABLE KEYS */;
+INSERT INTO `pinpal` VALUES (123256,'vali_code',NULL,NULL),(123456,'auo123','2019-11-11 17:10:19','aa123-nw456'),(453231,'afkl89',NULL,NULL);
 /*!40000 ALTER TABLE `pinpal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +82,7 @@ CREATE TABLE `user` (
   `password` varchar(20) NOT NULL,
   `name` varchar(15) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +91,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'a@ucd.ie','aa','123456','a');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -101,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-06 12:18:02
+-- Dump completed on 2019-11-13 12:43:26
