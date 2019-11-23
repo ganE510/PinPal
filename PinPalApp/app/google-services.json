@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "356095959306",
+    "firebase_url": "https://pinpal-40c2e.firebaseio.com",
+    "project_id": "pinpal-40c2e",
+    "storage_bucket": "pinpal-40c2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356095959306:android:398799ffcf82c6268f5af3",
+        "android_client_info": {
+          "package_name": "com.example.pinpals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356095959306-envnusbndo518c2lhl4g8gkfdmibdd9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pinpals",
+            "certificate_hash": "97bb1226d8cad5f566aeb5af68b239435ee33353"
+          }
+        },
+        {
+          "client_id": "356095959306-6s8pe8r7ldsqlj1pis0e54vbv1l079ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsZN13aklbjfi1-uXcERIjTUZOd1dNNc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356095959306-6s8pe8r7ldsqlj1pis0e54vbv1l079ti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
