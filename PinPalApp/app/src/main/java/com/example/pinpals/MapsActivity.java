@@ -3,9 +3,6 @@ package com.example.pinpals;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.Toast;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,43 +13,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import static java.security.AccessController.getContext;
-
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    double longitude, latidtude;
+    double longitude;
+    double latidtude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        int reg = intent.getIntExtra("reg",0);
         String timeString = intent.getStringExtra("time");
         longitude = intent.getDoubleExtra("longitude", 0);
         latidtude = intent.getDoubleExtra("latitude", 0);
-
+        Log.i("Intent",latidtude+""+longitude);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -74,13 +49,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        Log.i("Intent", latidtude + " " + longitude);
-        LatLng sydney = new LatLng(-34, 151);
-        LatLng dublin = new LatLng(latidtude, longitude); //lat,lng
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(53.350140, -6.266155);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.addMarker(new MarkerOptions().position(dublin).title("Marker in Dublin"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(dublin));
     }
-
 }
