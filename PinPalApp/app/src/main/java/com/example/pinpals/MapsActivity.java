@@ -43,6 +43,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        String timeString = intent.getStringExtra("time");
+        longitude = intent.getDoubleExtra("longitude", 0);
+        latidtude = intent.getDoubleExtra("latitude", 0);
+        Log.i("Intent",latidtude+""+longitude);
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         String url = "http://10.0.2.2:5000/latest";
