@@ -2,6 +2,7 @@ package com.example.pinpals;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
@@ -39,20 +40,19 @@ import static java.security.AccessController.getContext;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Handler handler;
+    double longitude, latidtude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
+        int reg = intent.getIntExtra("reg",0);
         String timeString = intent.getStringExtra("time");
         longitude = intent.getDoubleExtra("longitude", 0);
         latidtude = intent.getDoubleExtra("latitude", 0);
-        Log.i("Intent",latidtude+""+longitude);
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        String url = "http://10.0.2.2:5000/latest";
-        SendMessage(url, 1);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -73,85 +73,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-//        handler = new Handler() {
-//            @Override
-//            public void handleMessage(Message msg) {
-//                HashMap<Integer, PinPal> PinPals = new HashMap<Integer, PinPal>();
-//                super.handleMessage(msg);
-//                PinPals = (HashMap<Integer, PinPal>) msg.obj;
-                // Add a marker in Sydney and move the camera
-                LatLng sydney = new LatLng(-34, 151);
-                LatLng dublin = new LatLng(53.350140, -6.266155); //lat,lng
-                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                mMap.addMarker(new MarkerOptions().position(dublin).title("Marker in Dublin"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(dublin));
-//            }
-//        };
 
-
-    }
-
-    private void SendMessage(String url, int user_id) {
-        OkHttpClient client = new OkHttpClient();
-        FormBody.Builder formBuilder = new FormBody.Builder();
-        formBuilder.add("user_id", Integer.toString(user_id));
-        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MapsActivity.this, "Fail to connect the server", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                final String res = response.body().string();
-                Log.i("response", res);
-                HashMap<Integer, PinPal> PinPals = new HashMap<Integer, PinPal>();
-                try {
-                    JSONArray jsonArray = new JSONArray(res);
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                        if (jsonObject != null) {
-                            int reg = jsonObject.optInt("reg_code");
-
-                            String time = jsonObject.optString("time");
-
-                            double lat = jsonObject.optDouble("latitude");
-
-                            double lng = jsonObject.optDouble("longitude");
-
-                            // Package PinPal Object
-                            PinPal pinPal = new PinPal(reg, time, lat, lng);
-                            PinPals.put(pinPal.getReg(), pinPal);
-                        }
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-//                Log.i("map", PinPals.get(123456).getReg()+" ");
-
-                Message msg = handler.obtainMessage();
-                msg.obj = PinPals;
-                handler.sendMessage(msg);
-
-            }
-
-        });
+        Log.i("Intent", latidtude + " " + longitude);
+        LatLng sydney = new LatLng(-34, 151);
+        LatLng dublin = new LatLng(latidtude, longitude); //lat,lng
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions().position(dublin).title("Marker in Dublin"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(dublin));
     }
 
 }
