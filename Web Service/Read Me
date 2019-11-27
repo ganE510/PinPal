@@ -1,0 +1,2 @@
+This folders includes files of a flask webservice.  
+DAO is to connect the MySQL databsa and insert, update, search data from the database.  
