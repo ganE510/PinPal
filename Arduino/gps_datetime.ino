@@ -10,12 +10,12 @@
 
 SoftwareSerial ss(4, 5); // The serial connection to the GPS device
 
-const char* ssid = "GANQIMENG02";
-const char* password = "i1{619A8";
+const char* ssid = "ssid";
+const char* password = "password";
 
 //String key = "AIzaSyA5kTcYoudi-ciltTx-LXCzvnpPFhmHVpE";
 //int status = WL_IDLE_STATUS;
-const char* googleApiKey = "AIzaSyA5kTcYoudi-ciltTx-LXCzvnpPFhmHVpE";
+const char* googleApiKey = "googleApiKey";
 
 WifiLocation location(googleApiKey);
 
