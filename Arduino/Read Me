@@ -1,0 +1,1 @@
+There is a script for ESP8266 to get GPS inforamtion and time. It also sends the data out using http request.
